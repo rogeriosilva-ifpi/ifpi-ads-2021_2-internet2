@@ -4,7 +4,7 @@ import express, {Request, Response} from 'express'
 const app = express()
 
 // Inicilizando o Firebase
-var serviceAccount = require("./app-filmes-35501-firebase-adminsdk-lle6q-312745d244.json");
+var serviceAccount = require("./app-filmes-35501-firebase-adminsdk-lle6q-c36a078b7d.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
