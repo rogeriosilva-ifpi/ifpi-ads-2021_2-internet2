@@ -4,7 +4,7 @@ import express, {Request, Response} from 'express'
 const app = express()
 
 // Inicilizando o Firebase
-var serviceAccount = require("./app-filmes-35501-firebase-adminsdk-lle6q-c36a078b7d.json");
+var serviceAccount = require("./app-filmes-firebase.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -23,24 +23,28 @@ app.get('/filmes', async (req: Request, res: Response) => {
 
     const filmes: any[] = []
     
-    filmesDoc.forEach(doc=>filmes.push(doc.data()))
+    filmesDoc.docs.forEach(doc=>filmes.push({id: doc.id, ...doc.data()}))
 
     return res.status(200).json(filmes)
 })
 
-app.post('/filmes', (req: Request, res: Response) => {
-    const {id, nome, tema, duracao} = req.body
+app.post('/filmes', async (req: Request, res: Response) => {
+    const {nome, tema, duracao, ano} = req.body
 
-    return res.status(201).json({id, nome})
+    const filme = {nome, tema, duracao: Number(duracao), ano: Number(ano)}
+
+    const resultado = await db.collection('filmes').add(filme)
+
+    return res.status(201).json({id: resultado.id, ...filme})
 })
 
-app.get('/filmes/:id', (req: Request, res: Response) => {
+app.get('/filmes/:id', async (req: Request, res: Response) => {
 
     const id = req.params.id
 
-    const filme = {id, nome: 'Lagoa Azul', ano: 1995}
+    const filme = await db.collection('filmes').doc(id).get()
 
-    return res.json(filme)
+    return res.json({id: filme.id, ...filme.data()})
 })
 
 app.put('/filmes/:id', (req, res) => {
