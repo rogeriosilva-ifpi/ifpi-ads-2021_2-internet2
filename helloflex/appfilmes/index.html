@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Filmes</title>
+    <script src="filmes.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h1>App Filmes</h1>
+
+      <div id="acoes">
+        <input type="text" id="filme-nome" placeholder="Nome" />
+        <input type="text" id="filme-genero" placeholder="Gênero" />
+        <input type="text" id="filme-duracao" placeholder="Duração(min)" />
+        <input type="text" id="filme-ano" placeholder="Ano" />
+
+        <button id="btnNovoFilme">Adicionar Filme</button>
+      </div>
+
+      <div id="container-filmes">
+        <template id="filme-template">
+          <div class="filme">
+            <p>Nome: <span></span></p>
+            <p>Gênero: <span></span></p>
+            <p>Duração (min): <span></span></p>
+            <p>Ano: <span></span></p>
+          </div>
+          <hr />
+        </template>
+      </div>
+    </div>
+  </body>
+</html>

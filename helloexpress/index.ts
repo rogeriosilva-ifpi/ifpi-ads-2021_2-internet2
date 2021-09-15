@@ -1,34 +1,20 @@
-import * as admin from 'firebase-admin'
 import express, {Request, Response} from 'express'
 import cors from 'cors'
+import './src/infrastructure/persistence/firestore'
+import {db} from './src/infrastructure/persistence/firestore'
+import { MovieController } from './src/presentation/controllers/MovieController';
 
 const app = express()
 
-// Inicilizando o Firebase
-var serviceAccount = require("./app-filmes-firebase.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
-
-const db = admin.firestore()
+// Inicilizando o Firebase: 
+// movido para infra../firestore/index.ts
 
 app.use(express.json())
 app.use(cors())
 
+const movieController = new MovieController()
 // rotas (Filme: id, nome, tema, ano, duracao)
-app.get('/filmes', async (req: Request, res: Response) => {
-
-    const filmesRef = db.collection('filmes')
-
-    const filmesDoc = await filmesRef.get()
-
-    const filmes: any[] = []
-    
-    filmesDoc.docs.forEach(doc=>filmes.push({id: doc.id, ...doc.data()}))
-
-    return res.status(200).json(filmes)
-})
+app.get('/filmes', movieController.getAll)
 
 app.post('/filmes', async (req: Request, res: Response) => {
     const {nome, genero, duracao, ano} = req.body
@@ -57,11 +43,14 @@ app.put('/filmes/:id', (req, res) => {
 
     const filme = {id, nome: 'Lagoa Azul', ano: 1995}
 
+    // TODO
+
     return res.json(filme)
 })
 
 app.delete('/filmes/:id', (req, res) => {
     const {id} = req.params
+    // TODO
 
     return res.status(204).send()
 })
