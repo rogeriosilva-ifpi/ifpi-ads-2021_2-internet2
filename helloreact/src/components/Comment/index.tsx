@@ -1,0 +1,1 @@
+export const Comment = () => <h1>Comment</h1>
