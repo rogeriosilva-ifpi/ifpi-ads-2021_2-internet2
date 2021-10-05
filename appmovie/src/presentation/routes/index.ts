@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import filmeRoutes from './filmeRoutes'
+import filmeRoutes from './FilmeRoutes'
 
 const router = Router()
 

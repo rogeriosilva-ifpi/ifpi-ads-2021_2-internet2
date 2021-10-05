@@ -14,7 +14,6 @@ export const CountSC = () => {
     return (
         <div>
             <Title color="red">Counter App</Title>
-            <Title color="blue">Counter App</Title>
             <p>Você já clicou {rogerio} vezes</p>
 
             {rogerio >= 10 && <h3>Parabéns vc tirou 10!</h3>}

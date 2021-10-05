@@ -8,10 +8,10 @@ const router = Router()
 
 const movieController = new MovieController()
 // rotas (Filme: id, nome, tema, ano, duracao)
-router.get('/filmes', movieController.getAll)
-router.post('/filmes', movieController.create)
+router.get('/', movieController.getAll)
+router.post('/', movieController.create)
 
-router.get('/filmes/:id', async (req: Request, res: Response) => {
+router.get('/:id', async (req: Request, res: Response) => {
 
     const id = req.params.id
 
@@ -20,7 +20,7 @@ router.get('/filmes/:id', async (req: Request, res: Response) => {
     return res.json({id: filme.id, ...filme.data()})
 })
 
-router.put('/filmes/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     // 1. pegar no BD o obj de id, e atualizar seu dados
     // 2. return obj atualizado
 
@@ -33,7 +33,7 @@ router.put('/filmes/:id', (req, res) => {
     return res.json(filme)
 })
 
-router.delete('/filmes/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const {id} = req.params
     // TODO
 
