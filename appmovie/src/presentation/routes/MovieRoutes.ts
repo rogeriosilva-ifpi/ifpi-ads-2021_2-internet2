@@ -7,7 +7,6 @@ const router = Router()
 // Rotas específicas de Filme
 
 const movieController = new MovieController()
-// rotas (Filme: id, nome, tema, ano, duracao)
 router.get('/', movieController.getAll)
 router.post('/', movieController.create)
 
@@ -15,22 +14,16 @@ router.get('/:id', async (req: Request, res: Response) => {
 
     const id = req.params.id
 
-    const filme = await db.collection('filmes').doc(id).get()
+    const movie = await db.collection('movies').doc(id).get()
 
-    return res.json({id: filme.id, ...filme.data()})
+    return res.json({id: movie.id, ...movie.data()})
 })
 
 router.put('/:id', (req, res) => {
     // 1. pegar no BD o obj de id, e atualizar seu dados
     // 2. return obj atualizado
 
-    const { id } = req.params
-
-    const filme = {id, nome: 'Lagoa Azul', ano: 1995}
-
-    // TODO
-
-    return res.json(filme)
+    return res.json({todo: "TODO"})
 })
 
 router.delete('/:id', (req, res) => {

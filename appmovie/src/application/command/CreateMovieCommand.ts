@@ -1,11 +1,11 @@
-import { Filme } from "../../domain/entidades/Filme"
-import { MovieRepository } from "../repositories/MovieRepository"
+import { Movie } from "../../domain/entidades/Movie"
+import { MovieRepository } from "../../domain/repositories/MovieRepository"
 
 interface CreateMovieRequestModel{
-    nome: string
-    genero: string
-    duracao: number
-    ano: number
+    name: string
+    genre: string
+    duration: number
+    year: number
 }
 
 interface CreateMovieResponseModel{
@@ -23,11 +23,12 @@ export class CreateMovieCommand{
     public async execute(request: CreateMovieRequestModel): Promise<CreateMovieResponseModel>{
 
         // Lógica de Application
-        const {nome} = request
 
-        this.movieRepository.create({nome})
+        const newMovie = request as Movie
 
-        return {id: '0909ds'}
+        const id = await this.movieRepository.save(newMovie)
+
+        return { id }
     }
 
 }
