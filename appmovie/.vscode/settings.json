@@ -1,0 +1,6 @@
+{
+    "screencastMode.fontSize": 20,
+    "screencastMode.onlyKeyboardShortcuts": true,
+    "screencastMode.verticalOffset": 8,
+    "screencastMode.keyboardOverlayTimeout": 750
+}
