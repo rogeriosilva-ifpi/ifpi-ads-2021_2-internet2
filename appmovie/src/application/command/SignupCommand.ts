@@ -1,6 +1,5 @@
 import { UserRepository } from "../../domain/repositories/UserRepository";
 import { HashProvider } from "../providers/HashProvider";
-import { JWTProvider } from "../providers/JWTProvider";
 
 interface SignupRequestModel{
     username: string

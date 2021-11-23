@@ -2,18 +2,17 @@ import { UserRepository } from "../../../../domain/repositories/UserRepository";
 import { User } from "../../../../domain/entidades/User";
 import { FirebaseGenericRepo } from "./FirebaseGenericRepo";
 
-export class FirestoreUserRepository implements UserRepository{
+export class FirestoreUserRepository extends FirebaseGenericRepo<User> implements UserRepository{
+
+    constructor(){
+        super('users')
+    }
     
-    all(): Promise<User[]> {
-        throw FirebaseGenericRepo.all<User>('users');
-    }
-    save(obj: User): Promise<string> {
-        throw new Error("Method not implemented.");
-    }
-    get(id: number): Promise<User | undefined> {
-        throw new Error("Method not implemented.");
-    }
-    getByUsername(username: string): Promise<User | undefined> {
-        throw new Error("Method not implemented.");
+    public async getByUsername(username: string): Promise<User | undefined> {
+        const result = await this.getByAttribute('username', username)
+
+        if (result.length <= 0) return        
+
+        return result[0]
     }
 }
