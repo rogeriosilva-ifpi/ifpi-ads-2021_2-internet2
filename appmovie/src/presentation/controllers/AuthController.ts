@@ -21,7 +21,7 @@ export class AuthController{
         //TODO: Usar Injeção de Dependencias para construir o command
         const signupCommand = new SignupCommand(this.userRepo, this.hashProvider)
 
-        const result = signupCommand.execute({username, password})
+        const result = await signupCommand.execute({username, password})
 
         return res.status(200).send(result)
 
@@ -33,7 +33,7 @@ export class AuthController{
         //TODO: Usar Injeção de Dependencias para construir o command
         const signupCommand = new SigninCommand(this.userRepo, this.userTokenRepo,this.hashProvider, this.jwtProvider)
 
-        const result = signupCommand.execute({username, password})
+        const result = await signupCommand.execute({username, password})
 
         return res.status(200).send(result)
     }
@@ -45,7 +45,7 @@ export class AuthController{
         //TODO: Usar Injeção de Dependencias para construir o command
         const signupCommand = new RefreshTokenCommand(this.userTokenRepo, this.jwtProvider)
 
-        const result = signupCommand.execute({refreshToken})
+        const result = await signupCommand.execute({refreshToken})
 
         return res.status(200).send(result)
 

@@ -1,6 +1,7 @@
 import {Router, Request, Response} from 'express'
 import { db } from '../../infrastructure/persistence/firestore'
 import { MovieController } from '../controllers/MovieController'
+import { authMiddleware } from '../middleware/authenticated'
 
 const router = Router()
 
